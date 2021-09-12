@@ -20,11 +20,11 @@ class MusicForm extends Component {
     
     handleSubmit = (event) => {
       event.preventDefault();
-      let tempMusic = this.state.music;
-      tempMusic.push(this.state.musicName);
-      this.setState({
-        music: tempMusic
-      });
+      // let tempMusic = this.state.music;
+      // tempMusic.push(this.state.musicName);
+      // this.setState({
+        // music: tempMusic
+        this.props.addNewMusic(this.state.musicName);      
     }
 
     render() { 
