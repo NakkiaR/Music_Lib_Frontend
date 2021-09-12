@@ -3,18 +3,36 @@ import React, { Component } from 'react';
 import DisplayMusic from './DisplayMusic/DisplayMusic';
 import MusicForm from './MusicForm/MusicForm';
 import axios from 'axios';
-
+import MusicTable from './MusicTable/MusicTable';
 
 class App extends Component {
   constructor(props) {
     super(props);    
     this.state = {
       music: [
-        'ABC',
-        'DEF',
-        'GHI'
+        'abc',
+        'def',
+        'ghi',
       ],
-      musicFromApi: []
+      // musicInMyList: [
+      //   {
+      //     title: 'title',
+      //     artist: 'artist',
+      //     album: 'album',
+      //     release_date: '0000-00-00',
+      //     genre: 'genre',
+      //   }
+      // ],     
+      
+      musicFromApi: [
+        {
+          title: 'title',
+          artist: 'artist',
+          album: 'album',
+          release_date: '0000-00-00',
+          genre: 'genre',
+        }
+      ]
      }
   }
   
@@ -29,6 +47,7 @@ async getMyMusic() {
     musicFromApi: response.data
   })
 }
+
 
 addMusicToMusic = (musicToAdd) => {
   let tempMusic = this.state.music;
@@ -49,7 +68,8 @@ addMusicToMusic = (musicToAdd) => {
        {this.state.musicFromApi.map((music) => {
          return <h4>{music.artist}</h4>
        })}
-     </React.Fragment>
+        <MusicTable musicList={this.state.music}/>
+    </React.Fragment>
      );
   }
 } 
