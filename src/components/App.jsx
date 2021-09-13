@@ -1,36 +1,28 @@
 import React, { Component } from 'react';
 // import './App.css';
-import DisplayMusic from './DisplayMusic/DisplayMusic';
+// import DisplayMusic from './DisplayMusic/DisplayMusic';
 import MusicForm from './MusicForm/MusicForm';
 import axios from 'axios';
 import MusicTable from './MusicTable/MusicTable';
+// import ReactTable from 'react-table';
 
 class App extends Component {
   constructor(props) {
     super(props);    
     this.state = {
       music: [
-        'abc',
-        'def',
-        'ghi',
+        // 'abc',
+        // 'def',
+        // 'ghi',
       ],
-      // musicInMyList: [
-      //   {
-      //     title: 'title',
-      //     artist: 'artist',
-      //     album: 'album',
-      //     release_date: '0000-00-00',
-      //     genre: 'genre',
-      //   }
-      // ],     
-      
+         
       musicFromApi: [
         {
-          title: 'title',
-          artist: 'artist',
-          album: 'album',
-          release_date: '0000-00-00',
-          genre: 'genre',
+          // title: '',
+          // artist: '',
+          // album: '',
+          // release_date: '',
+          // genre: '',
         }
       ]
      }
@@ -48,27 +40,43 @@ async getMyMusic() {
   })
 }
 
-
-addMusicToMusic = (musicToAdd) => {
-  let tempMusic = this.state.music;
-  tempMusic.push(musicToAdd);
+async postMyMusic() {
+  let response = await axios.post('http://127.0.0.1:8000/music/');
+  //console.log(response.data[2].artist);
   this.setState({
-    music: tempMusic
-  });
+    addMusicToApi: response.data
+  })
 }
+
+
+// async updateMyMusic() {
+//   let response = await axios.put('http://127.0.0.1:8000/music/');
+//   //console.log(response.data[2].artist);
+//   this.setState({
+//     musicFromApi: response.data
+//   })
+// }
+
+// addMusicToMusic = (musicToAdd) => {
+//   let tempMusic = this.state.music;
+//   tempMusic.push(musicToAdd);
+//   this.setState({
+//     music: tempMusic // place into state 
+//   });
+// }
 
 
   render() { 
     return ( 
      <React.Fragment>
-       <DisplayMusic myMus={this.state.music} /> 
+       {/* <DisplayMusic myMus={this.state.music} />  */}
        <MusicForm addNewMusic={this.addMusicToMusic} />
        <h2>Music From  API</h2>
        <hr/>
        {this.state.musicFromApi.map((music) => {
          return <h4>{music.artist}</h4>
        })}
-        <MusicTable musicList={this.state.music}/>
+        <MusicTable musicList={this.state.musicFromApi}/>
     </React.Fragment>
      );
   }

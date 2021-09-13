@@ -1,35 +1,48 @@
-import React from 'react';
-import './MusicTable.css';
+import React, {Component} from 'react';
+import "./MusicTable.css";
+import axios from 'axios';
 
-const MusicTable = (props) => {
+class MusicTable extends Component {
+  constructor(props) {
+    super(props);
+      }
+  
 
-return <div className="app-container">
-
-<h2>Music Table</h2>
-<hr/><table>
-    <thead>
-        <tr>
+  render() { 
+    return (
+      <div className="app-container">
+      <table>
+        <thead>
+          <tr>
             <th>Title</th>
             <th>Artist</th>
             <th>Album</th>
             <th>Release Date</th>
             <th>Genre</th>
-        </tr>
-    </thead>
-    <tbody>
-        {props.musicList.map((musicList)=> (             
-         <tr>
-            <td>{musicList.title}</td>
-            <td>{musicList.artist}</td>
-            <td>{musicList.album}</td>
-            <td>{musicList.release_date}</td>
-            <td>{musicList.genre}</td>
-         </tr>
-    ))}
-    </tbody>
-  </table>
-</div>
-       
-    }             
+          </tr>
+        </thead>
+        <tbody>
+          {console.log("Props: ", this.props.musicList)}
+          {this.props.musicList.map((musicItem, index) => {
+            return(
+              <tr key={index} >
+                <td>{musicItem.title}</td>
+                <td>{musicItem.artist}</td>
+                <td>{musicItem.album}</td>
+                <td>{musicItem.release_date}</td>
+                <td>{musicItem.genre}</td>
+              </tr> 
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
+    );
+  }
+}
  
 export default MusicTable;
+
+
+
+
